@@ -1,0 +1,92 @@
+{% extends "layout.html" %}
+{% block head %}
+    {{super()}}
+{% endblock %}
+
+{% block container %}
+    {{super()}}
+    <div id="results-container">
+        <div id="results-counter-wrapper">
+            <p id="results-counter">10 results</p>
+        </div>
+
+        <div class="results-wrapper">
+            <a href="{{url_for('Drilldown.drill_down')}}" class="results-thumbnail">
+                <img src="http://placehold.it/250x250" alt="Image" class="img-responsive">
+                <div class="results-details-wrapper">
+                    <p class="results-category">HOW I GOT HERE</p>
+                    <b><p class="results-title">Registered nurse @ Toronto General Hospital</p></b>
+                    <p class="results-description">This is a short description of the video that
+                        is being placed beside this almost perfectly dimensioned thumbnail of a lovely educational video
+                        . herp derp.</p>
+                    <p class="results-company"> Toronto General Hospital</p>
+                    <p class="results-views">10k views</p>
+                    <p class="results-date">2 months ago</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+
+<style>
+    /*  ---------- VIDEOS ---------- */
+    .results-thumbnail {
+        float: left;
+        display: inline-block;
+        height: 100%;
+    }
+    .results-thumbnail img {
+        float: left;
+        height: 180px;
+    }
+    .results-details-wrapper {
+        float: left;
+        display: inline-block;
+        width: 500px;
+        padding: 20px 0px 0px 10px;
+    }
+    .results-wrapper {
+        height: auto;
+    }
+    .results-row-wrapper {
+        overflow-x: hidden;
+    }
+    .results-wrapper p {
+        margin-bottom: 0px;
+    }
+    .results-wrapper a, .results-wrapper a:hover {
+        color: black;
+        text-decoration: none;
+    }
+    .results-category, .results-company, .results-views, .results-date {
+        color: #A9A9A9;
+    }
+    .results-views, .results-company {
+        float: left;
+        margin-right: 15px;
+    }
+    p.results-description {
+        margin-bottom: 20px;
+    }
+
+    /*  ---------- VIDEO THUMBNAIL ---------- */
+    .results-thumbnail img {
+        height: 160px;
+        width: 230px;
+    }
+
+    /*  ---------- RESULTS COUNTER ---------- */
+    #results-counter-wrapper {
+        float: left;
+        display: block;
+        width: 90%;
+        padding: 10px 20px 20px 0px;
+    }
+    p#results-counter {
+        padding-bottom: 5px;
+        border-bottom: #A9A9A9 1px solid;
+    }
+
+</style>
+
+{% endblock %}
