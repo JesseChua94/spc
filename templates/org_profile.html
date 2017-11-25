@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+{% block head %}
+    {{super()}}
+{% endblock %}
+
+{% block container %}
+    {{super()}}
+    <div id="org-profile-wrapper">
+        <div id="org-profile-banner">
+            <img src="{{url_for('static', filename='org_profiles/sickkidsbanner.png')}}" alt="Image">
+        </div>
+        <div id="org-profile-content-wrapper">
+            <div id="org-profile-header">
+                <h2> Sick Kids Hospital</h2>
+            </div>
+            <div id="org-profile-stats-wrapper">
+                <p class="org-profile-stats"> 1k saves</p>
+                <p class="divider"> &nbsp&nbsp | &nbsp&nbsp </p>
+                <p class="org-profile-stats"> 21 videos</p>
+                <p class="divider"> &nbsp&nbsp | &nbsp&nbsp </p>
+                <p class="org-profile-stats"> Last active: 2 days ago</p>
+            </div>
+
+            <div id="org-profile-about-wrapper">
+                <h3>About</h3>
+                <p> description here</p>
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+<style>
+    #org-profile-wrapper {
+        height: 100%;
+        width: 100%;
+        padding-top: 100px;
+    }
+    #org-profile-content-wrapper {
+        padding-left: 75px;
+        padding-top: 30px;
+        width: 100%;
+        height: 100%;
+        float: left;
+        display: block;
+    }
+    #org-profile-about-wrapper {
+        display: block;
+        float: left;
+        width: 100%;
+        padding-bottom: 20px;
+        border-bottom: #A9A9A9 1px solid;
+    }
+    #org-profile-banner {
+        float: left;
+        display: block;
+        width: 100%;
+        height: 280px;
+    }
+    #org-profile-banner img {
+        height: 100%;
+        width: 100%;
+    }
+    .org-profile-stats, .divider {
+        display: inline-block;
+        float: left;
+    }
+
+
+</style>
+
+
+
+
+{% endblock %}

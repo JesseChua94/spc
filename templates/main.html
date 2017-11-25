@@ -6,7 +6,7 @@
 {% block container %}
     {{super()}}
     <div id="top-carousel">
-        {% for video_row in videos_list %}
+        {% for video_row in video_list %}
          <h4>{{video_row['category']}}</h4>
             <div id="myCarousel{{loop.index}}" class="carousel slide" data-interval="false">
                 <!-- Carousel items -->
@@ -17,15 +17,17 @@
                         <div class="videos-row-wrapper">
                             {% for item in videos[1:] %}
                             <div class="video-wrapper">
-                                <a href="{{url_for('Drilldown.drill_down', category=item)}}" class="thumbnail">
-                                    <img src="http://placehold.it/250x250" alt="Image" class="img-responsive">
-                                    <p class="video-category">A DAY IN THE LIFE</p>
-                                    <p class="video-title">Construction worker</p>
-                                    <a class="video-company-link" href="{{url_for('Drilldown.drill_down')}}">
-                                        <p class="video-company">Company A</p>
-                                    </a>
-                                    <p class="video-views">10k views</p>
-                                    <p class="video-date">2 months ago</p>
+                                <a href="{{url_for('Drilldown.drill_down', video=item)}}" class="thumbnail">
+                                    <img src="{{url_for('static', filename='video_thumbnails/video_placeholder.jpg')}}" alt="Image" class="img-responsive">
+                                    <p class="video-title">{{item['title']}}</p>
+                                </a>
+                                <a class="video-company-link"
+                                   href="{{url_for('Organization.org_profile')}}">
+                                    <p class="video-company">{{item['organization']}}</p>
+                                </a>
+                                <a href="{{url_for('Drilldown.drill_down', video=item)}}">
+                                    <p class="video-views">{{item['views']}} views</p>
+                                    <p class="video-date">{{item['date_created']}}</p>
                                 </a>
                             </div>
                             {% endfor %}
@@ -38,7 +40,8 @@
                 <div class="left carousel-control {{loop.index}}" href="#myCarousel{{loop.index}}" data-slide="prev" hidden>
                     <a >‹</a>
                 </div>
-                <div class="right carousel-control {{loop.index}}" href="#myCarousel{{loop.index}}" data-slide="next">
+                <div class="right carousel-control {{loop.index}}" href="#myCarousel{{loop.index}}"
+                     data-slide="next" {% if video_row['videos']|length == 1 %} hidden {% endif %}>
 
                     <a>›</a>
                 </div>
@@ -58,6 +61,11 @@ $( document ).ready(function() {
             $this.children('.right.carousel-control').hide();
         }
     });
+
+    $("p.video-company-link").click(function(e) {
+        e.stopPropagation();
+        console.log("clickedddd");
+})
 });
 
 </script>
@@ -65,16 +73,17 @@ $( document ).ready(function() {
 <style>
     /*  ---------- CAROUSEL ---------- */
     #top-carousel {
-        padding-left: 0px;
+        padding-top: 150px;
+        padding-left: 75px;
         overflow: hidden;
     }
     .carousel-control {
-        padding-top: 70px;
+        padding-top: 50px;
         width: 50px;
-        height: 180px;
+        height: 130px;
     }
     .carousel {
-        --carousel-row: 1000px;
+        width: 1440px;
         display: inline-block;
     }
 
@@ -87,6 +96,8 @@ $( document ).ready(function() {
         margin-bottom: 0px;
     }
     .video-wrapper a, .video-wrapper a:hover {
+        width: 100%;
+        display: block;
         color: black;
         text-decoration: none;
     }
@@ -98,8 +109,9 @@ $( document ).ready(function() {
         margin-right: 5px;
     }
     .video-wrapper {
-        width: 210px;
-        height: 200px;
+        vertical-align: top;
+        width: 260px;
+        height: 220px;
         display: inline-block;
     }
     .video-wrapper:first {
@@ -110,15 +122,17 @@ $( document ).ready(function() {
     }
     /*  ---------- VIDEO DETAILS ---------- */
     .video-company-link {
+        position: relative;
         z-index: 99;
     }
-    .video-company-link p:hover {
+    .video-company-link:hover {
         font-weight: bold;
     }
 
     /*  ---------- VIDEO THUMBNAIL ---------- */
     .thumbnail img {
-        height: 180px;
+        height: 130px;
+        width: 100%;
         margin: 0px;
 
     }

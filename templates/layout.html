@@ -12,22 +12,33 @@
 
 <body>
     <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
-            <a id="navbar-logo" class="navbar-brand" href="{{url_for('Main.main_page')}}">Logo</a>
-                <div class="row">
-                    <div id="search-wrapper">
-                        <form method="post" role="form" id="search-bar-form"
-                              action="{{url_for('Search.search_input')}}" class="navbar-form navbar-left">
-                            <div class="form-group">
-                                <input name="input" id="search-input" type="text" class="form-control" placeholder="Search">
-                            </div>
-                        </form>
-                    </div>
-                    <a id="navbar-profile" class="navbar-brand navbar-right" href="#">Profile</a>
+        <div id="navbar-inner" class="container-fluid">
+                <div id="search-wrapper">
+                    <form method="post" role="form" id="search-bar-form"
+                          action="{{url_for('Search.search_input')}}" class="navbar-form navbar-left">
+                        <div class="form-group">
+                            <input name="input" id="search-input" type="text"
+                                   class="form-control"
+                                   placeholder="Search for jobs, companies, topics">
+                        </div>
+                    </form>
                 </div>
+                <div id="profile-thumb-wrapper">
+                    <a id="profile-thumb-link" class="navbar-brand navbar-right" href="#">
+                        <p> AA</p>
+                    </a>
+            </div>
         </div><!-- /.container-fluid -->
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="{{url_for('Main.main_page')}}">Home</a></li>
+            <li><a href="#">A day in the life</a></li>
+            <li><a href="#">Things I wish I knew</a></li>
+            <li><a href="#">How I got here</a></li>
+            <li><a href="#">See what we're doing</a></li>
 
+        </ul>
     </nav>
+
             <!--</div>-->
             <div id="main">
                 {% block container %}
@@ -41,10 +52,7 @@
 
     /*  ---------- MAIN ---------- */
     #main {
-        width: 1200px;
-        margin-left: 75px;
-        padding-top: 75px;
-        max-width: 1200px;
+        max-width: 1440px;
     }
 
     /*  ---------- SIDE NAVBAR ---------- */
@@ -199,26 +207,75 @@
         padding-left: 75px;
         float: left;
     }
-
-    /*  --- SEARCH BAR --- */
+    /*  --- TOP NAVBAR: PROFILE THUMB --- */
+    #profile-thumb-wrapper {
+        float: right;
+        height: 35px;
+        width: 35px;
+        margin-right: 30px;
+        margin-top: 8px;
+        background: grey;
+        border-radius: 50%;
+    }
+    a#profile-thumb-link {
+        height: 100%;
+        width: 100%;
+        cursor: pointer;
+        padding: 0px;
+    }
+    a#profile-thumb-link p {
+        padding-top: 6px;
+        text-align: center;
+        color: black;
+    }
+    .navbar-nav {
+        padding-left: 75px;
+        float: left;
+        margin: 0;
+        width: 1440px;
+    }
+    /*  --- TOP NAVBAR: LIST --- */
+    ul.navbar-nav li:first-child {
+        padding-left: 0px;
+    }
+    ul.navbar-nav li:last-child {
+        padding-right: 0px;
+    }
+    .navbar-nav li {
+        float: left;
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+    nav.navbar-default ul.navbar-nav li.active a{
+        color: orange;
+        font-weight: bold;
+        border-bottom: orange 3px solid;
+        background-color: transparent;
+    }
+    nav.navbar-default ul.navbar-nav li a{
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    /*  --- TOP NAVBAR: SEARCH BAR --- */
+    #navbar-inner {
+        text-align: center;
+    }
     #search-bar-form {
         width: 100%;
-        padding-left: 0px;
-        padding-top: 0px;
-        padding-bottom: 0px;
+        padding: 0px;
+        margin-bottom: 0px;
     }
     #search-bar-form .form-group {
-        width: 80%;
+        width: 100%;
     }
     #navbar-profile {
         margin-right: 10px;
         float: right;
     }
     #search-wrapper {
-        float: left;
         display: inline-block;
-        max-width: 500px;
-        width: 50%;
+        max-width: 600px;
+        width: 100%;
     }
     .navbar-form {
         border: None;
@@ -229,7 +286,7 @@
             width: 700px;
             overflow: hidden;
         }
-
     }
+
 </style>
 </html>

@@ -9,5 +9,6 @@ def drill_down():
     print(req)
     return render_page()
 
+
 def render_page():
     return render_template('drill_down.html')
