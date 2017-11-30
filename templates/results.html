@@ -7,34 +7,34 @@
     {{super()}}
     <div id="results-container">
         <div id="results-counter-wrapper">
-            <p id="results-counter">10 results</p>
+            <p id="results-counter">{{video_list | length}} results for "{{req}}"</p>
         </div>
-
-        <div class="results-wrapper">
-            <a href="{{url_for('Drilldown.drill_down')}}" class="results-thumbnail">
-                <img src="http://placehold.it/250x250" alt="Image" class="img-responsive">
-            </a>
-            <div class="results-details-wrapper">
-                <a href="{{url_for('Drilldown.drill_down')}}">
-                    <p class="results-category">HOW I GOT HERE</p>
-                    <b><p class="results-title">Registered nurse @ Toronto General Hospital</p></b>
-                    <p class="results-description">This is a short description of the video that
-                        is being placed beside this almost perfectly dimensioned thumbnail of a lovely educational video
-                        . herp derp.
-                    </p>
+        {% for video in video_list %}
+            <div class="results-wrapper">
+                <a href="{{url_for('Drilldown.drill_down')}}" class="results-thumbnail">
+                    <img src="http://placehold.it/250x250" alt="Image" class="img-responsive">
                 </a>
-                <a class="video-company-link" href="{{url_for('Organization.org_profile')}}">
-                    <p class="results-company">Toronto General Hospital</p>
-                </a>
-                <a href="{{url_for('Drilldown.drill_down')}}">
-                    <p class="results-date">2 months ago</p>
-                    <p class="divider"> &nbsp&nbsp | &nbsp&nbsp </p>
-                    <p class="results-views">10k views</p>
-                </a>
+                <div class="results-details-wrapper">
+                    <a href="{{url_for('Drilldown.drill_down')}}">
+                        <p class="results-category">{{video['category']}}</p>
+                        <b><p class="results-title">{{video['title']}}</p></b>
+                        <p class="results-description">{{video['description']}}</p>
+                    </a>
+                    <a class="video-company-link"
+                       href="{{url_for('Organization.org_profile', org_id=video['organization_id'])}}">
+                        <p class="results-company">{{video['organization']}}</p>
+                    </a>
+                    <a href="{{url_for('Drilldown.drill_down')}}">
+                        <p class="results-date">{{video['date_created']}}</p>
+                        <p class="divider"> &nbsp&nbsp | &nbsp&nbsp </p>
+                        <p class="results-views">{{video['views']}} views</p>
+                    </a>
+                </div>
             </div>
-        </div>
+        {% endfor %}
     </div>
-
+{% block carousel %}
+{% endblock %}
 
 <style>
     #results-container {
@@ -66,6 +66,7 @@
         padding: 10px 0px 0px 10px;
     }
     .results-wrapper {
+        padding-bottom: 15px;
         width: 100%;
         float: left;
         display: block;

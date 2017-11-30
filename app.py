@@ -19,6 +19,8 @@ json_data = open(app.root_path + '/videos.json')
 app.config['VIDEOS'] = json.load(json_data)
 json_data = open(app.root_path + '/categories.json')
 app.config['CATEGORIES'] = json.load(json_data)
+json_data = open(app.root_path + '/organizations.json')
+app.config['ORGANIZATIONS'] = json.load(json_data)
 
 app.debug = True
 

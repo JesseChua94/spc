@@ -25,9 +25,11 @@
                 </div>
                 <div id="profile-thumb-wrapper">
                     <a id="profile-thumb-link" class="navbar-brand navbar-right" href="#">
-                        <p> AA</p>
+                        <img alt="Image"
+                             src="{{url_for('static', filename='icons/my_account@2x.png')}}">
                     </a>
-            </div>
+                    <p>My account</p>
+                </div>
         </div><!-- /.container-fluid -->
         <ul class="nav navbar-nav">
             <li class="active"><a href="{{url_for('Main.main_page')}}">Home</a></li>
@@ -43,18 +45,161 @@
             <div id="main">
                 {% block container %}
                 {% endblock %}
+
+                <!--Work around for lack of multiple extensions in jinja-->
+                {% block carousel %}
+                    <div id="top-carousel">
+                        {% for video_row in video_list %}
+                        <h4>{{video_row['category']}}</h4>
+                            <div id="myCarousel{{loop.index}}" class="carousel slide" data-interval="false">
+                                <!-- Carousel items -->
+                                <div class="carousel-inner {{loop.index}}">
+                                    <!--/item-->
+                                    {% for videos in video_row['videos'] %}
+                                    <div class="item {{videos[0]}}">
+                                        <div class="videos-row-wrapper">
+                                            {% for item in videos[1:] %}
+                                            <div class="video-wrapper">
+                                                <a href="{{url_for('Drilldown.drill_down', video=item)}}" class="thumbnail">
+                                                    <img src="{{url_for('static', filename='video_thumbnails/video_placeholder.jpg')}}" alt="Image" class="img-responsive">
+                                                    <p class="video-title">{{item['title']}}</p>
+                                                </a>
+                                                <a class="video-company-link"
+                                                   href="{{url_for('Organization.org_profile', org_id=item['organization_id'])}}">
+                                                    <p class="video-company">{{item['organization']}}</p>
+                                                </a>
+                                                <a href="{{url_for('Drilldown.drill_down', video=item)}}">
+                                                    <p class="video-views">{{item['views']}} views</p>
+                                                    <p class="divider"> &nbsp&nbsp | &nbsp&nbsp </p>
+                                                    <p class="video-date">{{item['date_created']}}</p>
+                                                </a>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                        <!--/row-->
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                <!--/carousel-inner-->
+                                <div class="left carousel-control {{loop.index}}" href="#myCarousel{{loop.index}}" data-slide="prev" hidden>
+                                    <a ><img src="{{url_for('static', filename='icons/left_arrow.png')}}"></a>
+                                </div>
+                                <div class="right carousel-control {{loop.index}}" href="#myCarousel{{loop.index}}"
+                                     data-slide="next" {% if video_row['videos']|length <= 1 %}hidden {% endif %}>
+
+                                    <a><img src="{{url_for('static', filename='icons/right_arrow.png')}}"></a>
+                                </div>
+                            </div>
+                            <!--/myCarousel-->
+                        {% endfor %}
+                        </div>
+                    <script>
+                    $( document ).ready(function() {
+                        $("[id^='myCarousel']").on('slid.bs.carousel', function() {
+                            var $this = $(this);
+                            $this.children('.carousel-control').show();
+                            var $inner = $this.children('.carousel-inner');
+                            if($inner.children('.item:first').hasClass('active')) {
+                                $this.children('.left.carousel-control').hide();
+                            } else if($inner.children('.item:last').hasClass('active')) {
+                                $this.children('.right.carousel-control').hide();
+                            }
+                        });
+                    });
+
+                    </script>
+
+                    <style>
+                        /*  ---------- CAROUSEL ---------- */
+                        #top-carousel {
+                            padding-left: 75px;
+                            overflow: hidden;
+                        }
+                        .carousel-control {
+                            margin-top: 45px;
+                            width: 50px;
+                            height: 40px;
+                        }
+                        div.carousel-control.right, div.carousel-control.left {
+                            background-image: none;
+                        }
+                        .carousel-control:hover {
+                            cursor: pointer;
+                        }
+                        .carousel {
+                            width: 1316px;
+                            display: inline-block;
+                        }
+
+                        /*  ---------- VIDEOS ---------- */
+                        .videos-row-wrapper {
+                            overflow-x: hidden;
+                            width: 100%;
+                        }
+                        .video-wrapper p {
+                            margin-bottom: 0px;
+                        }
+                        .video-wrapper a, .video-wrapper a:hover {
+                            width: 100%;
+                            display: block;
+                            color: black;
+                            text-decoration: none;
+                        }
+                        .video-category, .video-company, .video-views, .video-date {
+                            color: #A9A9A9;
+                        }
+                        .video-views {
+                            float: left;
+                            margin-right: 5px;
+                        }
+                        .video-wrapper {
+                            vertical-align: top;
+                            width: 260px;
+                            height: 220px;
+                            display: inline-block;
+                        }
+                        .video-wrapper:first {
+                            margin-left: 0px;
+                        }
+                        .video-wrapper:last {
+                            margin-right: 0px;
+                        }
+                        /*  ---------- VIDEO DETAILS ---------- */
+                        .video-company-link {
+                            position: relative;
+                            z-index: 99;
+                        }
+                        .video-company-link:hover {
+                            font-weight: bold;
+                        }
+                        .divider {
+                            display: inline-block;
+                            float: left;
+                            color: #A9A9A9;
+                        }
+
+                        /*  ---------- VIDEO THUMBNAIL ---------- */
+                        .thumbnail img {
+                            height: 130px;
+                            width: 100%;
+                            margin: 0px;
+
+                        }
+                        .thumbnail {
+                            -webkit-box-shadow: 0 0 0;
+                            box-shadow: 0 0 0;
+                            padding: 0px;
+                            border: 0;
+
+
+                    </style>
+            {% endblock%}
             </div>
 </body>
 <style>
     html, body, nav-side-menu {
         height: 100%;
     }
-
-    /*  ---------- MAIN ---------- */
-    #main {
-        max-width: 1440px;
-    }
-
     /*  ---------- SIDE NAVBAR ---------- */
 
     .nav-side-menu {
@@ -210,11 +355,8 @@
     /*  --- TOP NAVBAR: PROFILE THUMB --- */
     #profile-thumb-wrapper {
         float: right;
-        height: 35px;
-        width: 35px;
         margin-right: 30px;
         margin-top: 8px;
-        background: grey;
         border-radius: 50%;
     }
     a#profile-thumb-link {
@@ -223,10 +365,15 @@
         cursor: pointer;
         padding: 0px;
     }
-    a#profile-thumb-link p {
-        padding-top: 6px;
+    a#profile-thumb-link img {
+        height: 35px;
+        width: 35px;
         text-align: center;
-        color: black;
+    }
+    div#profile-thumb-wrapper p {
+        color: #A9A9A9;
+        line-height: 1;
+        font-size: 12px;
     }
     .navbar-nav {
         padding-left: 75px;
@@ -260,13 +407,23 @@
     #navbar-inner {
         text-align: center;
     }
+    #search-input {
+        background: url({{url_for('static', filename='icons/search@2x.png')}}) no-repeat scroll;
+        background-position: -15px -7px;
+        background-size: 70px 60px;
+        padding-left: 35px;
+    }
     #search-bar-form {
         width: 100%;
         padding: 0px;
         margin-bottom: 0px;
     }
     #search-bar-form .form-group {
+        height: 45px;
         width: 100%;
+    }
+    #search-bar-form .form-group input {
+        height: 100%;
     }
     #navbar-profile {
         margin-right: 10px;
@@ -276,6 +433,9 @@
         display: inline-block;
         max-width: 600px;
         width: 100%;
+    }
+    #search-wrapper form {
+
     }
     .navbar-form {
         border: None;
@@ -290,3 +450,6 @@
 
 </style>
 </html>
+
+
+

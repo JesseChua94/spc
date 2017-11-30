@@ -5,6 +5,25 @@
 
 {% block container %}
     {{super()}}
+<div id="drill-wrapper">
+    <div id="video-wrapper">
+
+    </div>
+    <div id="drill-details-wrapper">
+        <p class="drill-category">THINGS I WISH I KNEW</p>
+        <p class="drill-title"> The paperwork as a Nurse</p>
+        <p class="drill-organization"> St. Joseph's Health Centre</p>
+        <p class="drill-views"> 10k views</p>
+        <p class="divider">&nbsp&nbsp|&nbsp&nbsp</p>
+        <p class="drill-date-created"> 2 months ago</p>
+    </div>
+
+    <div id="drill-comments-wrapper">
+
+
+
+    </div>
+</div>
 
 
 
@@ -13,4 +32,48 @@
 
 
 
+
+<style>
+    #top-carousel {
+        padding-left: 75px;
+        overflow: hidden;
+        padding-top: 40px;
+        float: left;
+    }
+    #drill-wrapper {
+        display: block;
+        padding-top: 150px;
+        padding-left: 75px;
+        width: 100%;
+        height: 100%;
+    }
+    #video-wrapper {
+        display: block;
+        float: left;
+        width: 900px;
+        height: 450px;
+    }
+    #drill-comments-wrapper {
+        width: auto;
+        display: inline-block;
+        height: 100%;
+    }
+    #drill-details-wrapper {
+        display: block;
+        float: left;
+    }
+    #drill-details-wrapper p {
+        margin-bottom: 0px;
+        color: #A9A9A9;
+        float: left;
+    }
+    p.drill-category, p.drill-title, p.drill-organization {
+        width: 100%;
+    }
+    p.drill-views, p.drill-date-created, p.divider {
+    }
+    #drill-details-wrapper p.drill-title {
+        color: black;
+    }
+</style>
 {% endblock %}
