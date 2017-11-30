@@ -13,7 +13,7 @@ def org_profile():
 
     org_videos = get_organization_videos(org_id)
     sorted_videos = sort_main_categories(org_videos)
-    video_list = format_videos(sorted_videos)
+    video_list = format_videos(5, sorted_videos)
 
     return render_page(org, video_list)
 

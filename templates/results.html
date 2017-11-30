@@ -6,9 +6,17 @@
 {% block container %}
     {{super()}}
     <div id="results-container">
+        {% if video_list == []%}
+            <div id="no-results-wrapper">
+                <h1>Well, this is embarassing.</h1>
+                <p><b>Sorry we couldn't find any matches for "{{req}}".</b></p>
+                <p><b> Try searching for something like:</b></p>
+            </div>
+        {% else %}
         <div id="results-counter-wrapper">
             <p id="results-counter">{{video_list | length}} results for "{{req}}"</p>
         </div>
+
         {% for video in video_list %}
             <div class="results-wrapper">
                 <a href="{{url_for('Drilldown.drill_down')}}" class="results-thumbnail">
@@ -32,11 +40,17 @@
                 </div>
             </div>
         {% endfor %}
+        {% endif %}
     </div>
 {% block carousel %}
 {% endblock %}
 
 <style>
+    #no-results-wrapper {
+        margin: 0 auto;
+        width: 50%;
+        padding-left: 100px;
+    }
     #results-container {
         padding-top: 150px;
         padding-left: 75px;

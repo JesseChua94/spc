@@ -8,7 +8,7 @@ main = Blueprint('Main', __name__)
 def main_page():
     video_data = current_app.config['VIDEOS']
     sorted_videos = sort_main_categories(video_data.values())
-    video_list = format_videos(sorted_videos)
+    video_list = format_videos(5, sorted_videos)
     return render_page(video_list)
 
 
@@ -32,7 +32,7 @@ def sort_main_categories(video_data):
         category = video['category_id']
         if category not in categories:
             categories[category] = []
-        video_limit = current_app.config['VIDEO_ROW_LIMIT'] * \
+        video_limit = 5 * \
             current_app.config['VIDEO_ROW_DEPTH_LIMIT']
         if len(categories[category]) != video_limit:
             categories[category].append(video)

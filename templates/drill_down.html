@@ -4,10 +4,9 @@
 {% endblock %}
 
 {% block container %}
-    {{super()}}
 <div id="drill-wrapper">
     <div id="video-wrapper">
-
+        <img alt="Image" src="{{url_for('static', filename='drill_stock.png')}}">
     </div>
     <div id="drill-details-wrapper">
         <p class="drill-category">THINGS I WISH I KNEW</p>
@@ -18,9 +17,23 @@
         <p class="drill-date-created"> 2 months ago</p>
     </div>
 
+
+    {{super()}}
     <div id="drill-comments-wrapper">
+        <h4>Comments</h4>
+        {% for comment in comments %}
+        <div class="drill-comment-wrapper">
+            <div class="comments-profile-thumb">{{comment['name'][0]}}</div>
+            <p><b>{{comment['name']}}</b></p>
+            <p class="drill-comment-text">{{comment['comment']}}</p>
+        </div>
+        {% endfor %}
+    </div>
 
+    <div id="drill-stats">
 
+    </div>
+    <div id="drill-media">
 
     </div>
 </div>
@@ -35,10 +48,13 @@
 
 <style>
     #top-carousel {
-        padding-left: 75px;
+        padding-left: 0px;
         overflow: hidden;
         padding-top: 40px;
         float: left;
+    }
+    div.carousel {
+        width: auto;
     }
     #drill-wrapper {
         display: block;
@@ -53,12 +69,42 @@
         width: 900px;
         height: 450px;
     }
-    #drill-comments-wrapper {
-        width: auto;
-        display: inline-block;
+    #video-wrapper img {
+        width: 100%;
         height: 100%;
     }
+    #drill-comments-wrapper {
+        width: 430px;
+        display: inline-block;
+        height: 100%;
+        padding-left: 30px;
+    }
+    .drill-comment-text {
+        width: 100%;
+    }
+    #drill-comments-wrapper p {
+        display: inline-block;
+    }
+    .drill-comment-wrapper {
+        padding-bottom: 50px;
+        border-bottom: 1px grey solid;
+        padding-top: 20px;
+    }
+    .drill-comment-wrapper:last-child {
+        border-bottom: transparent;
+    }
+    .comments-profile-thumb {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        border-radius: 50%;
+        padding-top: 3px;
+        border: 2px #4FDBBC solid;
+        color: #4FDBBC;
+    }
     #drill-details-wrapper {
+        padding-top: 10px;
         display: block;
         float: left;
     }
