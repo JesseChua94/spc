@@ -27,7 +27,10 @@ def primary_search(string):
                            "thumbnail": video['thumbnail'],
                            "organization": video['organization'],
                            "organization_id": video['organization_id'],
+                           "related_videos": video['related_videos'],
+                           "comments": video['comments'],
                            "category": category,
+                           "category_id": video['category_id'],
                            "description": video['description'],
                            "views": video['views'],
                            "date_created": video['date_created']})

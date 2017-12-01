@@ -23,8 +23,10 @@
 
         {% for video in video_list %}
             <div class="results-wrapper">
-                <a href="{{url_for('Drilldown.drill_down')}}" class="results-thumbnail">
-                    <img src="http://placehold.it/250x250" alt="Image" class="img-responsive">
+                <a href="{{url_for('Drilldown.drill_down', video=video)}}"
+                   class="results-thumbnail">
+                     <img src="{{url_for('static', filename=video['thumbnail'])}}"
+                          alt="Image" class="img-responsive">
                 </a>
                 <div class="results-details-wrapper">
                     <a href="{{url_for('Drilldown.drill_down')}}">
@@ -119,13 +121,13 @@
         float: left;
     }
     p.results-description {
-        height: 60px;
+        height: 40px;
     }
 
     /*  ---------- VIDEO THUMBNAIL ---------- */
     .results-thumbnail img {
-        height: 160px;
-        width: 230px;
+        height: 130px;
+        width: 260px;
     }
 
     /*  ---------- RESULTS COUNTER ---------- */

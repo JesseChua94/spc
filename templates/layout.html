@@ -24,11 +24,19 @@
                     </form>
                 </div>
                 <div id="profile-thumb-wrapper">
-                    <a id="profile-thumb-link" class="navbar-brand navbar-right" href="#">
-                        <img alt="Image"
-                             src="{{url_for('static', filename='icons/my_account@2x.png')}}">
-                    </a>
-                    <p>My account</p>
+                    <div>
+                        <a id="profile-thumb-link" class="navbar-brand navbar-right" href="#">
+                            <img alt="Image"
+                                 src="{{url_for('static', filename='icons/my_account@2x.png')}}">
+                        </a>
+                        <p>My account</p>
+                    </div>
+                    <div>
+                        <img id="my-board" alt="Image"
+                         src="{{url_for('static', filename='icons/my_board@2x.png')}}">
+                        <p id="my-board-text">My board</p>
+                    </div>
+
                 </div>
         </div><!-- /.container-fluid -->
         <ul class="nav navbar-nav">
@@ -61,7 +69,9 @@
                                             {% for item in videos[1:] %}
                                             <div class="video-wrapper">
                                                 <a href="{{url_for('Drilldown.drill_down', video=item)}}" class="thumbnail">
-                                                    <img src="{{url_for('static', filename='video_thumbnails/video_placeholder.jpg')}}" alt="Image" class="img-responsive">
+                                                    <img
+                                                            src="{{url_for('static', filename=item['thumbnail'])}}"
+                                                         alt="Image" class="img-responsive">
                                                     <p class="video-title">{{item['title']}}</p>
                                                 </a>
                                                 <a class="video-company-link"
@@ -370,6 +380,18 @@
         margin-right: 30px;
         margin-top: 8px;
         border-radius: 50%;
+    }
+    #profile-thumb-wrapper div {
+        float: right;
+        display: inline;
+    }
+    #profile-thumb-wrapper #my-board {
+        width: 35px;
+        height: 35px;
+        margin-right: 15px;
+    }
+    #my-board-text {
+        margin-right: 15px;
     }
     a#profile-thumb-link {
         height: 100%;

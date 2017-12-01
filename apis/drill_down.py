@@ -11,15 +11,14 @@ def drill_down():
     if not req['video']:
         return "Didn't select a video"
     video = json.loads(req['video'].replace("\'", "\""))
-    print(video)
     related_videos = get_related_videos(video['related_videos'])
     video_list = format_videos(3, [{"category": "Related videos", "videos": related_videos}])
     comments = get_video_comments(video['comments'])
-    return render_page(video_list, comments)
+    return render_page(video, video_list, comments)
 
 
-def render_page(video_list, comments):
-    return render_template('drill_down.html', video_list=video_list, comments=comments)
+def render_page(video, video_list, comments):
+    return render_template('drill_down.html', video=video, video_list=video_list, comments=comments)
 
 
 def get_related_videos(related_list):

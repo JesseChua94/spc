@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block container %}
-    {{super()}}
+
     <div id="org-profile-wrapper">
         <div id="org-profile-banner">
             <img src="{{url_for('static', filename='org_profiles/sickkidsbanner.png')}}" alt="Image">
@@ -17,19 +17,21 @@
             <div id="org-profile-stats-wrapper">
                 <p class="org-profile-stats"> 1k saves</p>
                 <p class="divider"> &nbsp&nbsp | &nbsp&nbsp </p>
-                <p class="org-profile-stats"> 21 videos</p>
+                <p class="org-profile-stats"> 7 videos</p>
                 <p class="divider"> &nbsp&nbsp | &nbsp&nbsp </p>
                 <p class="org-profile-stats"> Last active: 2 days ago</p>
             </div>
 
             <div id="org-profile-about-wrapper">
                 <h3>About</h3>
-                <p> description here</p>
+                <p>Welcome to the profile page of Sick Kids! You can find all our uploaded
+                    videos here. You can learn more about how we work, what a typical day looks
+                    like, and what it takes to join our family.</p>
             </div>
 
         </div>
     </div>
-
+    {{super()}}
 <style>
     #org-profile-wrapper {
         height: 100%;
@@ -50,6 +52,7 @@
         float: left;
         width: 100%;
         padding-bottom: 20px;
+        margin-bottom: 20px;
         border-bottom: #A9A9A9 1px solid;
     }
     #org-profile-banner {

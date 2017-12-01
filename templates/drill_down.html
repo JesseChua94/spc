@@ -5,16 +5,21 @@
 
 {% block container %}
 <div id="drill-wrapper">
-    <div id="video-wrapper">
-        <img alt="Image" src="{{url_for('static', filename='drill_stock.png')}}">
-    </div>
-    <div id="drill-details-wrapper">
-        <p class="drill-category">THINGS I WISH I KNEW</p>
-        <p class="drill-title"> The paperwork as a Nurse</p>
-        <p class="drill-organization"> St. Joseph's Health Centre</p>
-        <p class="drill-views"> 10k views</p>
-        <p class="divider">&nbsp&nbsp|&nbsp&nbsp</p>
-        <p class="drill-date-created"> 2 months ago</p>
+    <div>
+        <div id="video-wrapper">
+            <img alt="Image" src="{{url_for('static', filename='drill_stock.png')}}">
+        </div>
+        <div id="drill-details-wrapper">
+            <p class="drill-category">{{video['category']}}</p>
+            <p class="drill-title"><b> {{video['title']}}</b></p>
+            <a href="{{url_for('Organization.org_profile', org_id=video['organization_id'])}}">
+                <p class="drill-organization">{{video['organization']}}</p>
+            </a>
+
+            <p class="drill-views">{{video['views']}} views</p>
+            <p class="divider">&nbsp&nbsp|&nbsp&nbsp</p>
+            <p class="drill-date-created">{{video['date_created']}}</p>
+        </div>
     </div>
 
 
@@ -105,8 +110,12 @@
     }
     #drill-details-wrapper {
         padding-top: 10px;
-        display: block;
+        display: inline-block;
         float: left;
+        width: 900px;
+    }
+    #drill-details-wrapper a:hover {
+        font-weight: bold;
     }
     #drill-details-wrapper p {
         margin-bottom: 0px;
