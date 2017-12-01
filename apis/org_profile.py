@@ -8,7 +8,7 @@ organization = Blueprint('Organization', __name__)
 @organization.route('/organization_profile/', methods=['GET', 'POST'])
 def org_profile():
     req = request.args.to_dict()
-    org_id = req['org_id']
+    org_id = "1"
     org = current_app.config['ORGANIZATIONS'][org_id]
 
     org_videos = get_organization_videos(org_id)
