@@ -8,10 +8,14 @@
     <div id="results-container">
         {% if video_list == []%}
             <div id="no-results-wrapper">
-                <h1>Well, this is embarassing.</h1>
-                <p><b>Sorry we couldn't find any matches for "{{req}}".</b></p>
-                <p><b> Try searching for something like:</b></p>
+                <div id="no-results-text">
+                    <h1>Well, this is embarassing.</h1>
+                    <p><b>Sorry we couldn't find any matches for "{{req}}".</b></p>
+                    <p><b> Try searching for something like:</b></p>
+                </div>
+                <img alt="Image" src="{{url_for('static', filename='no_results_face.png')}}">
             </div>
+
         {% else %}
         <div id="results-counter-wrapper">
             <p id="results-counter">{{video_list | length}} results for "{{req}}"</p>
@@ -47,9 +51,17 @@
 
 <style>
     #no-results-wrapper {
+        padding-top: 100px;
         margin: 0 auto;
-        width: 50%;
-        padding-left: 100px;
+        width: 800px;
+        padding-right: 75px;
+    }
+    #no-results-wrapper img {
+        padding-left: 30px;
+    }
+    #no-results-text {
+        float: left;
+        display: inline-block;
     }
     #results-container {
         padding-top: 150px;
